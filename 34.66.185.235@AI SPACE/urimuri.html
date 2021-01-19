@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		/*#mainin{
+			margin: auto;
+		}*/
+		#video{
+			float: left;
+			display: inline-block;
+			/*margin: auto;
+			padding: auto;*/
+		}
+		#canvas{
+			float: right;
+			display: inline-block;
+			/*margin: auto;
+			padding: auto;*/
+		}
+		#snap{
+			display: block;
+			clear: both;
+			margin: auto;
+			background-color: #FF0000; /* Green */
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			/*text-align: center;*/
+			text-decoration: none;
+			/*display: inline-block;*/
+			font-size: 16px;
+
+		}
+	</style>
+	<title>Attendance Portal</title>
+</head>
+<body>
+	<h1 align="center">Welcome to Attendance Portal</h1>
+	<video id="video" width="600px" height="600px" autoplay></video>
+	<br><br><br><br>
+	<canvas id="canvas" width="600px" height="600px"></canvas>
+	<button id="snap">Snap Photo</button>
+<script type="text/javascript">
+	// Grab elements, create settings, etc.
+	var video = document.getElementById('video');
+	// Elements for taking the snapshot
+	var canvas = document.getElementById('canvas');
+	var context = canvas.getContext('2d');
+	var video = document.getElementById('video');
+
+	// Trigger photo take
+	document.getElementById("snap").addEventListener("click", function() {
+		context.drawImage(video, 0, 0, 640, 480);
+	});
+
+	// Get access to the camera!
+	if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+	    // Not adding `{ audio: true }` since we only want video now
+	    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+	        //video.src = window.URL.createObjectURL(stream);
+	        video.srcObject = stream;
+	        video.play();
+	    });
+	}
+
+</script>
+</body>
+</html>
